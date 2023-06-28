@@ -1,0 +1,34 @@
+name: deploy
+
+on:  
+  workflow_dispatch:
+    inputs:
+      GIT_BRANCH:
+        description: 'branch to clone on the given git repository'
+        required: true
+        default: 'main'
+      APP:
+        type: string
+        description: App to deploy
+        required: true
+        default: 'esuite-starterkit'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    env:
+      GH_USERNAME: ${{ github.repository_owner }}
+      GH_PASSWORD: ${{ secrets.GH_PASSWORD }}
+      
+    steps:
+      - name: checkout
+        run: |
+          git config --global http.sslverify false
+          git clone --branch ${{ github.event.inputs.GIT_BRANCH}} https://$GH_USERNAME:$GH_PASSWORD@esuite-spikes _
+      
+      - name: trigger the build and deploy process
+        run: |
+          cd _
+
+          ./esuite-poc/commons/ci-cd/scripts/deploy/deploy.sh ${{ github.event.inputs.APP}}
+      
