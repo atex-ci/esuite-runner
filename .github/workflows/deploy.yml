@@ -17,6 +17,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     env:
+      REPO_TO_FETCH: "github.com/atex-ci/esuite-spikes.git"
       GH_USERNAME: ${{ github.repository_owner }}
       GH_PASSWORD: ${{ secrets.GH_PASSWORD }}
       
@@ -24,7 +25,7 @@ jobs:
       - name: checkout
         run: |
           git config --global http.sslverify false
-          git clone --branch ${{ github.event.inputs.GIT_BRANCH}} https://$GH_USERNAME:$GH_PASSWORD@esuite-spikes _
+          git clone --branch ${{ github.event.inputs.GIT_BRANCH}} https://$GH_USERNAME:$GH_PASSWORD@$REPO_TO_FETCH _ 
       
       - name: trigger the build and deploy process
         run: |
