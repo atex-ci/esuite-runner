@@ -20,9 +20,6 @@ jobs:
       REPO_TO_FETCH: "github.com/atex-ci/esuite-spikes.git"
       GH_USERNAME: ${{ github.repository_owner }}
       GH_PASSWORD: ${{ secrets.GH_PASSWORD }}
-      CONVOX_TOKEN: ${{ secrets.CONVOX_TOKEN }}
-      CONVOX_RACK: "atex-development/atex-dev"
-      CONVOX_APP: "esuite-spikes"
       
     steps:
       - name: checkout
@@ -34,5 +31,5 @@ jobs:
         run: |
           cd _
 
-          ./esuite-poc/commons/ci-cd/scripts/deploy/deploy.sh ${{ github.event.inputs.APP}} ${CONVOX_TOKEN} ${CONVOX_RACK} ${CONVOX_APP}
+          ./esuite-poc/commons/ci-cd/scripts/deploy/deploy.sh ${{ github.event.inputs.APP}} ${{ secrets.CONVOX_TOKEN }} atex-development/atex-dev esuite-spikes
       
