@@ -34,5 +34,5 @@ jobs:
         run: |
           cd _
 
-          ./esuite-poc/commons/ci-cd/scripts/deploy/deploy.sh ${{ github.event.inputs.APP}} $CONVOX_TOKEN $CONVOX_RACK $CONVOX_APP
+          ./esuite-poc/commons/ci-cd/scripts/deploy/deploy.sh ${{ github.event.inputs.APP}} ${CONVOX_TOKEN} ${CONVOX_RACK} ${CONVOX_APP}
       
